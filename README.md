@@ -2,10 +2,11 @@
 
 ## Introducción
 
-EEUU, junto a México y Canadá, organizará el Mundial de futbol 2026. Un evento único en el mundo que mueve más de 3 millones de espectadores y 3.5 billones de televidentes (fuente: FIFA). Siendo el Metlife Stadium con una capacidad de 82.500 personas sede de siete partidos distribuidos en cuatro de fase de grupos, uno de 16vos de final, uno de 4tos de final y sobre todo el más importante, la final, el objetivo principal de este proyecto es Recomendar una ubicación en los alrededores del estadio para la apertura de un local de pizzas, a esto añadimos que según el último Censo realizado por Estados Unidos New York ocupa el cuarto lugar entre los estados con mayores ingresos por concepto de restaurantes de servicio limitado y New Jearsey entre dentro del Top 15 en este concepto.
-
+EEUU, junto a Méjico y Canadá, organizará el Mundial de futbol 2026. Un evento único en el mundo que mueve mas de 3 millones de espectadores y 3.5 billones de televidentes (fuente: FIFA). Siendo el Metlife Stadium con una capacidad de 82.500 personas sede de siete partidos distribuidos en cuatro de fase de grupos, uno de 16vos de final, uno de 4tos de final y sobre todo el mas importante, la final.
+El objetivo principal de este proyecto es recomendar una ubicación para la apertura de un nuevo restaurante de pizza en el estado de Nueva Jersey, en las inmediaciones del Metlife Stadium, a partir de un análisis de sentimientos de los comentarios expresados en Google Maps y Yelp.
 
 ## Objetivos del Proyecto
+
 
 Este proyecto tiene como objetivos:
 
