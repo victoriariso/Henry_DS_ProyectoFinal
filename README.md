@@ -6,11 +6,11 @@ EEUU, junto a México y Canadá, organizará el Mundial de futbol 2026. Un event
 
 ## Objetivos del Proyecto
 
--Recomendar una ubicación para la apertura de un nuevo restaurante de pizza en el estado de Nueva Jersey, en las inmediaciones del Metlife Stadium.
+- Recomendar una ubicación para la apertura de un nuevo restaurante de pizza en el estado de Nueva Jersey, en las inmediaciones del Metlife Stadium.
 
--Crear un Dashboard en Power BI que permita visualizar KPIs relacionados con las reviews plasmadas en Google Maps y las puntuaciones de la experiencia de los clientes.
+- Crear un Dashboard en Power BI que permita visualizar KPIs relacionados con las reviews plasmadas en Google Maps y las puntuaciones de la experiencia de los clientes.
 
--Crear un sistema de recomendación de restaurante para los clientes en la zona de New Jearsey.
+- Crear un sistema de recomendación de restaurante para los clientes en la zona de New Jearsey.
 
 ## Datos Utilizados
 
