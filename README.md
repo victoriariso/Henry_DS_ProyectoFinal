@@ -30,7 +30,7 @@ El procesamiento de datos lo realizaremos con AWS Glue, que nos permite ejecutar
 Para la automatización, optamos por AWS Lambda, lo que nos permite orquestar flujos de trabajo de Glue y RDS de manera automática sin servidores.
 En la parte de Machine Learning, utilizaremos Scikit-learn para modelos predictivos y de análisis de sentimiento, optimizando el proceso de toma de decisiones basado en datos y spaCy para procesamiento de lenguaje natural
 Por último, para la visualización y despliegue, usaremos Power BI para dashboards interactivos y Streamlit para crear aplicaciones dinámicas y accesibles.
-Este stack nos permite un flujo de datos completamente automatizado, optimizando la ingesta, transformación, almacenamiento y análisis, asegurando eficiencia y escalabilidad en la nube
+Este stack nos permite un flujo de datos completamente automatizado, optimizando la ingesta, transformación, almacenamiento y análisis, asegurando eficiencia y escalabilidad en la nube.
 
 ![Stack](<Assets/Stack Tecnológico.png>)
 
