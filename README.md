@@ -26,11 +26,17 @@ Los datos empleados han sido extraídos de las siguientes fuentes:
 
 Para nuestro proyecto, elegimos un stack tecnológico basado en AWS, ya que nos permite escalabilidad, automatización y optimización de costos sin necesidad de gestionar 
 infraestructura propia.
+
 Para la fuente de datos, utilizamos datasets de Yelp y Google Maps, almacenándolos en Amazon S3 en formatos JSON y Parquet, lo que nos permite manejar grandes volúmenes de datos de manera eficiente y reducir costos de almacenamiento.
+
 El procesamiento de datos lo realizaremos con AWS Glue, que nos permite ejecutar procesos ETL para luego cargarlos en Amazon RDS que será nuestra base de datos relacional optimizada para consultas SQL rápidas. Además, utilizaremos Pandas y NumPy para análisis exploratorio.
+
 Para la automatización, optamos por AWS Lambda, lo que nos permite orquestar flujos de trabajo de Glue y RDS de manera automática sin servidores.
+
 En la parte de Machine Learning, utilizaremos Scikit-learn para modelos predictivos y de análisis de sentimiento, optimizando el proceso de toma de decisiones basado en datos y spaCy para procesamiento de lenguaje natural.
+
 Por último, para la visualización y despliegue, usaremos Power BI para dashboards interactivos y Streamlit para crear aplicaciones dinámicas y accesibles.
+
 Este stack nos permite un flujo de datos completamente automatizado, optimizando la ingesta, transformación, almacenamiento y análisis, asegurando eficiencia y escalabilidad en la nube.
 
 ![Stack](<Assets/Stack Tecnológico.png>)
