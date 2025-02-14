@@ -24,29 +24,32 @@ Los datos empleados han sido extraídos de las siguientes fuentes:
 
 ## Tecnologías Utilizadas
 
-Las tecnologías y herramientas utilizadas en este proyecto incluyen:
+Para nuestro proyecto, elegimos un stack tecnológico basado en AWS, ya que nos permite escalabilidad, automatización y optimización de costos sin necesidad de gestionar infraestructura propia.
+Para la fuente de datos, utilizamos datasets de Yelp y Google Maps, almacenándolos en Amazon S3 en formatos JSON y Parquet, lo que nos permite manejar grandes volúmenes de datos de manera eficiente y reducir costos de almacenamiento.
+El procesamiento de datos lo realizaremos con AWS Glue, que nos permite ejecutar procesos ETL para luego cargarlos en Amazon RDS que será nuestra base de datos relacional optimizada para consultas SQL rápidas. Además, utilizaremos Pandas y NumPy para análisis exploratorio. 
+Para la automatización, optamos por AWS Lambda, lo que nos permite orquestar flujos de trabajo de Glue y RDS de manera automática sin servidores.
+En la parte de Machine Learning, utilizaremos Scikit-learn para modelos predictivos y de análisis de sentimiento, optimizando el proceso de toma de decisiones basado en datos y spaCy para procesamiento de lenguaje natural
+Por último, para la visualización y despliegue, usaremos Power BI para dashboards interactivos y Streamlit para crear aplicaciones dinámicas y accesibles.
+Este stack nos permite un flujo de datos completamente automatizado, optimizando la ingesta, transformación, almacenamiento y análisis, asegurando eficiencia y escalabilidad en la nube.
 
-- MySQL
-
-- AWS
-
-- Python
-
-- ScikitLearn
-
-- Power BI
-
-- Streamlit
+![Stack](<Assets/Stack Tecnológico.png>)
 
 ## KPIs
 
 Se emplearán 3 KPIs principales para evaluar el éxito del proyecto:
 
-- Crecimiento trimestral de 2% en el número de reviews para la cadena en los estados estudiados.
+- Crecimiento trimestral de 2% en el número de reviews para la cadena en los estados estudiados. Su fórmula es la siguiente:
 
-- Incremento de 2% en la valoración de los establecimientos en los estados de Nueva York y Nueva Jersey.
+$`KPI = ((Reviews Nuevos - Reviews Actual) / Reviews Actual) * 100`$
 
-- Aumento de 3% en los comentarios positivos en el área estudiada.
+- Incremento trimestral de 0.1 puntos en la valoración de los establecimientos en los estados de Nueva York y Nueva Jersey. Su fórmula es la siguiente:
+
+$`KPI = Valoración Nueva - Valoración Actual`$
+
+- Aumentar la proporción trimestral de comentarios positivos en 3% de los establecimientos. Su fórmula es la siguiente:
+
+$`KPI = (((Comentarios Positivos Nuevos- Comentarios Negativos Nuevos) - (Comentarios Positivos Actuales - Comentarios Negativos Actuales))/ (Comentarios Positivos Actuales - Comentarios Negativos Actuales)) * 100`$
+
 
 ## Hallazgos Preliminares
 
@@ -57,3 +60,5 @@ Se emplearán 3 KPIs principales para evaluar el éxito del proyecto:
 - Pizza Hut la cadena en que se enfoca este proyecto tiene un promedio de calificación de 3.3 en New Jearsey y 3.7 en New York.
 
 - A continuación se puede observar la relación entre la cantidad de reviews en Google Map y el promedio de calificaciones, destacando que a mayor número de reviews menor es el número de calificaciones.
+
+![Reviews](<Assets/Relación Reviews - Puntuaciones.png>)
