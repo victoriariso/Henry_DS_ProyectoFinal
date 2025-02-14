@@ -24,29 +24,24 @@ Los datos empleados han sido extraídos de las siguientes fuentes:
 
 ## Tecnologías Utilizadas
 
-Las tecnologías y herramientas utilizadas en este proyecto incluyen:
-
-- MySQL
-
-- AWS
-
-- Python
-
-- ScikitLearn
-
-- Power BI
-
-- Streamlit
+![Stack](<Assets/Stack Tecnológico.png>)
 
 ## KPIs
 
 Se emplearán 3 KPIs principales para evaluar el éxito del proyecto:
 
-- Crecimiento trimestral de 2% en el número de reviews para la cadena en los estados estudiados.
+- Crecimiento trimestral de 2% en el número de reviews para la cadena en los estados estudiados. Su fórmula es la siguiente:
 
-- Incremento de 2% en la valoración de los establecimientos en los estados de Nueva York y Nueva Jersey.
+$`KPI = ((Reviews Nuevos - Reviews Actual) / Reviews Actual) * 100`$
 
-- Aumento de 3% en los comentarios positivos en el área estudiada.
+- Incremento trimestral de 0.1 puntos en la valoración de los establecimientos en los estados de Nueva York y Nueva Jersey. Su fórmula es la siguiente:
+
+$`KPI = Valoración Nueva - Valoración Actual`$
+
+- Aumentar la proporción trimestral de comentarios positivos en 3% de los establecimientos. Su fórmula es la siguiente:
+
+$`KPI = (((Comentarios Positivos Nuevos- Comentarios Negativos Nuevos) - (Comentarios Positivos Actuales - Comentarios Negativos Actuales))/ (Comentarios Positivos Actuales - Comentarios Negativos Actuales)) * 100`$
+
 
 ## Hallazgos Preliminares
 
@@ -57,3 +52,5 @@ Se emplearán 3 KPIs principales para evaluar el éxito del proyecto:
 - Pizza Hut la cadena en que se enfoca este proyecto tiene un promedio de calificación de 3.3 en New Jearsey y 3.7 en New York.
 
 - A continuación se puede observar la relación entre la cantidad de reviews en Google Map y el promedio de calificaciones, destacando que a mayor número de reviews menor es el número de calificaciones.
+
+![Reviews](<Assets/Relación Reviews - Puntuaciones.png>)
