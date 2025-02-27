@@ -76,8 +76,14 @@ $`KPI = (((Comentarios Positivos Nuevos- Comentarios Negativos Nuevos) - (Coment
 
 ## Diccionario de Datos
 
+### Datos provenientes de API
+
 ![Dic_API](<Assets/Diccionario de Datos API.jpg>)
 
+### Datos de Reviews Google Maps
+
 ![Dic_Rev](<Assets/Diccionario de Datos Reviews.jpg>)
+
+### Datos de Sitios Google Maps
 
 ![Dic_Sit](<Assets/Diccionario de Datos Sitios.jpg>)
