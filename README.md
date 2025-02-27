@@ -69,3 +69,21 @@ $`KPI = (((Comentarios Positivos Nuevos- Comentarios Negativos Nuevos) - (Coment
 - A continuación se puede observar la relación entre la cantidad de reviews en Google Map y el promedio de calificaciones, destacando que a mayor número de reviews menor es el número de calificaciones.
 
 ![Reviews](<Assets/Relación Reviews - Puntuaciones.png>)
+
+## Diseño del Modelo Entidad-Relación
+
+![Diagrama](<Assets/Diagrama Entidad-Relación.jpg>)
+
+## Diccionario de Datos
+
+### Datos provenientes de API
+
+![Dic_API](<Assets/Diccionario de Datos API.jpg>)
+
+### Datos de Reviews Google Maps
+
+![Dic_Rev](<Assets/Diccionario de Datos Reviews.jpg>)
+
+### Datos de Sitios Google Maps
+
+![Dic_Sit](<Assets/Diccionario de Datos Sitios.jpg>)
