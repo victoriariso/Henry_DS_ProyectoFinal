@@ -39,7 +39,7 @@ Por último, para la visualización y despliegue, usaremos Power BI para dashboa
 
 Este stack nos permite un flujo de datos completamente automatizado, optimizando la ingesta, transformación, almacenamiento y análisis, asegurando eficiencia y escalabilidad en la nube.
 
-![Stack](<Assets/Stack Tecnológico.png>)
+![Stack](<Assets/Stack Tecnológico Actualizado.png>)
 
 ## KPIs
 
