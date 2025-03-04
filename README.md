@@ -1,43 +1,84 @@
-# Proyecto de Análisis de Sentimientos y Dashboard para Apertura de Restaurante de Pizza
+# Análisis de Sentimientos y Dashboard para Optimización de Ubicación de Pizzería en New Jersey/New York
+
+![alt text](<Assets/Pizza Hut portada.png>)
+
+## Descripción del proyecto
+
+Este proyecto tiene como objetivo identificar la mejor ubicación para la apertura de un restaurante de pizzas en la ciudad de New York y en las inmediaciones del MetLife Stadium, en New Jersey, para nuestro cliente Pizza Hut.  
+
+Para ello, se desarrollaron dos modelos de Machine Learning:  
+- Un **sistema de recomendación**, que sugiere tres establecimientos cercanos a los clientes potenciales.  
+- Un **modelo de análisis de sentimientos**, basado en reseñas previas de los usuarios, para evaluar la percepción de los consumidores sobre distintos restaurantes.  
+
+Además, se diseñó un **dashboard interactivo en Power BI** que permite visualizar métricas clave y optimizar la toma de decisiones estratégicas respecto a la ubicación de nuevas pizzerías y reviews dejados por el cliente.  
+
+## Tabla de Contenidos
+1. [Introducción](#introducción)
+2. [Objetivos del Proyecto](#objetivos-del-proyecto)
+3. [Datos Utilizados](#datos-utilizados)
+4. [Tecnologías Utilizadas](#tecnologías-utilizadas)
+5. [KPIs](#kpis)
+6. [Exploración de Datos (EDA) y Hallazgos Preliminares](#exploración-de-datos-eda-y-hallazgos-preliminares)
+7. [Diccionario de Datos](#diccionario-de-datos)
+8. [Modelo Entidad-Relación](#modelo-entidad-relación)
+9. [Pipeline y ETL Automatizado](#pipeline-y-etl-automatizado)
+10. [Dashboard](#dashboard)
+11. [Modelos Machine Learning](#modelos-machine-learning)
+12. [Estructura del Repositorio](#estructura-del-repositorio)
+13. [Conclusión](#conclusión)
+14. [Autores y Contacto](#autores-y-contacto)
 
 ## Introducción
 
-EEUU, junto a México y Canadá, organizará el Mundial de futbol 2026. Un evento único en el mundo que mueve más de 3 millones de espectadores y 3.5 billones de televidentes (fuente: FIFA). Siendo el Metlife Stadium con una capacidad de 82.500 personas sede de siete partidos distribuidos en cuatro de fase de grupos, uno de 16vos de final, uno de 4tos de final y sobre todo el más importante, la final, el objetivo principal de este proyecto es Recomendar una ubicación en los alrededores del estadio para la apertura de un local de pizzas, a esto añadimos que según el último Censo realizado por Estados Unidos New York ocupa el cuarto lugar entre los estados con mayores ingresos por concepto de restaurantes de servicio limitado y New Jearsey entre dentro del Top 15 en este concepto.
+## Introducción  
+
+En 2026, Estados Unidos, junto a México y Canadá, será anfitrión de la Copa del Mundo de la FIFA, un evento global que atraerá a más de 3 millones de espectadores y alcanzará una audiencia televisiva de aproximadamente 3.5 mil millones de personas (fuente: FIFA). Entre los estadios seleccionados, el MetLife Stadium, con una capacidad de 82,500 espectadores, será sede de siete partidos, incluyendo cuatro de la fase de grupos, uno de dieciseisavos de final, uno de cuartos de final y, sobre todo, la gran final del torneo.  
+
+Este proyecto tiene como objetivo identificar la mejor ubicación en las inmediaciones del estadio para la apertura de un restaurante de pizzas. Además, según el último censo de Estados Unidos, Nueva York ocupa el cuarto lugar entre los estados con mayores ingresos generados por restaurantes de servicio limitado, mientras que New Jersey se encuentra dentro del Top 15 en este sector, lo que refuerza la viabilidad de esta inversión.  
 
 ## Objetivos del Proyecto
 
-- Recomendar una ubicación para la apertura de un nuevo restaurante de pizza en el estado de Nueva Jersey, en las inmediaciones del Metlife Stadium.
+- Recomendar una ubicación para la apertura de un nuevo restaurante de pizza en el estado de New Jersey, en las inmediaciones del Metlife Stadium, o en la ciudad de New York.
 
 - Crear un Dashboard en Power BI que permita visualizar KPIs relacionados con las reviews plasmadas en Google Maps y las puntuaciones de la experiencia de los clientes.
 
-- Crear un sistema de recomendación de restaurante para los clientes en la zona de New Jearsey.
+- Crear un sistema de recomendación de restaurante para los clientes en la zona de New Jersey.
 
-## Datos Utilizados
+## Datos Utilizados  
 
-Los datos empleados han sido extraídos de las siguientes fuentes:
+Los datos empleados han sido extraídos de las siguientes fuentes:  
 
-- Google Maps
+- **Google Maps:** Se utilizó para extraer información sobre establecimientos de pizza en las áreas de interés, incluyendo calificaciones, reseñas de usuarios y ubicación geográfica.  
 
-- Yelp
+- **API del Censo de EE.UU. (2022):** Proporciona datos demográficos y económicos relevantes de New Jersey y New York, permitiendo un análisis detallado del entorno comercial y la demanda potencial en estas zonas.  
 
-- API de loopnet para conocer la disponibilidad de locales en las zonas aledañas al estadio.
+- **Yelp:** Si bien se cuenta con una base de datos de reseñas de usuarios de Yelp, se decidió no utilizarla debido a su escasa o nula información relevante sobre los estados de New Jersey y New York, que son los de interés para nuestro cliente, Pizza Hut.  
 
-## Tecnologías Utilizadas
+## Tecnologías Utilizadas  
 
-Para nuestro proyecto, elegimos un stack tecnológico basado en AWS, ya que nos permite escalabilidad, automatización y optimización de costos sin necesidad de gestionar 
-infraestructura propia.
+Para este proyecto, elegimos un stack tecnológico basado en **AWS**, ya que ofrece escalabilidad, automatización y optimización de costos sin necesidad de gestionar infraestructura propia.  
 
-Para la fuente de datos, utilizamos datasets de Yelp y Google Maps, almacenándolos en Amazon S3 en formatos JSON y Parquet, lo que nos permite manejar grandes volúmenes de datos de manera eficiente y reducir costos de almacenamiento.
+- **Almacenamiento de datos:** Los datasets de Google Maps y la API del Censo se almacenan en **Amazon S3** en formatos JSON y Parquet, lo que permite manejar grandes volúmenes de datos de manera eficiente y reducir costos de almacenamiento.  
 
-El procesamiento de datos lo realizaremos con AWS Glue, que nos permite ejecutar procesos ETL para luego cargarlos en Amazon RDS que será nuestra base de datos relacional optimizada para consultas SQL rápidas. Además, utilizaremos Pandas y NumPy para análisis exploratorio.
+- **Procesamiento ETL:** Se utiliza **AWS Lambda** para ejecutar procesos de extracción, transformación y carga (ETL), integrando datos de distintas fuentes y preparándolos para su almacenamiento y análisis.  
 
-Para la automatización, optamos por AWS Lambda, lo que nos permite orquestar flujos de trabajo de Glue y RDS de manera automática sin servidores.
+- **Data Warehouse:**  
+  - Se implementará un **Data Warehouse en Amazon RDS**, diseñado para optimizar el almacenamiento y análisis de datos estructurados.  
+  - Este Data Warehouse permitirá ejecutar consultas SQL de manera eficiente, facilitando el acceso a información clave para la toma de decisiones.  
+  - Su arquitectura garantizará integridad y escalabilidad, asegurando tiempos de respuesta rápidos para consultas analíticas.  
 
-En la parte de Machine Learning, utilizaremos Scikit-learn para modelos predictivos y de análisis de sentimiento, optimizando el proceso de toma de decisiones basado en datos y spaCy para procesamiento de lenguaje natural.
+- **Automatización del pipeline:** **AWS Lambda** también se encarga de la orquestación de los flujos de trabajo, asegurando la ejecución eficiente y sin intervención manual de los procesos de ingesta y transformación de datos.  
 
-Por último, para la visualización y despliegue, usaremos Power BI para dashboards interactivos y Streamlit para crear aplicaciones dinámicas y accesibles.
+- **Análisis de Datos y Machine Learning:**  
+  - **Pandas y NumPy** para análisis exploratorio de datos.  
+  - **Scikit-learn** para modelos predictivos y análisis de sentimientos basados en reseñas de usuarios.  
+  - **spaCy** para procesamiento de lenguaje natural.  
 
-Este stack nos permite un flujo de datos completamente automatizado, optimizando la ingesta, transformación, almacenamiento y análisis, asegurando eficiencia y escalabilidad en la nube.
+- **Visualización y Despliegue:**  
+  - **Power BI** para la creación de dashboards interactivos que faciliten la toma de decisiones basada en datos.  
+  - **Streamlit** para desarrollar aplicaciones dinámicas y accesibles, proporcionando una interfaz intuitiva para el análisis de resultados.  
+
+Este stack tecnológico permite un flujo de datos completamente automatizado, optimizando la ingesta, transformación, almacenamiento y análisis, garantizando eficiencia y escalabilidad en la nube.   
 
 ![Stack](<Assets/Stack Tecnológico Actualizado.png>)
 
@@ -45,45 +86,144 @@ Este stack nos permite un flujo de datos completamente automatizado, optimizando
 
 Se emplearán 3 KPIs principales para evaluar el éxito del proyecto:
 
-- Crecimiento trimestral de 2% en el número de reviews para la cadena en los estados estudiados. Su fórmula es la siguiente:
+1. Crecimiento trimestral de 2% en el número de reviews para la cadena en los estados estudiados. Su fórmula es la siguiente:
 
 $`KPI = ((Reviews Nuevos - Reviews Actual) / Reviews Actual) * 100`$
 
-- Incremento trimestral de 0.1 puntos en la valoración de los establecimientos en los estados de Nueva York y Nueva Jersey. Su fórmula es la siguiente:
+2. Incremento trimestral de 0.1 puntos en la valoración de los establecimientos en los estados de New York y New Jersey. Su fórmula es la siguiente:
 
 $`KPI = Valoración Nueva - Valoración Actual`$
 
-- Aumentar la proporción trimestral de comentarios positivos en 3% de los establecimientos. Su fórmula es la siguiente:
+3. Aumentar la proporción trimestral de comentarios positivos en 3% de los establecimientos. Su fórmula es la siguiente:
 
 $`KPI = (((Comentarios Positivos Nuevos- Comentarios Negativos Nuevos) - (Comentarios Positivos Actuales - Comentarios Negativos Actuales))/ (Comentarios Positivos Actuales - Comentarios Negativos Actuales)) * 100`$
 
 
-## Hallazgos Preliminares
+## Exploración de Datos (EDA) y Hallazgos Preliminares
 
-- El promedio de calificaciones para las pizzerías de los estados de New Jearsey y New York es de 4.11. El rango de calificación se encuentra entre 1 y 5.
+- El promedio de calificaciones para las pizzerías de los estados de New Jersey y New York es de 4.11. El rango de calificación se encuentra entre 1 y 5, siendo 1 muy malo y 5 muy bueno.
 
-- Los locales tienen en promedio 89.9 reviews cada uno. El que más riviews posee 4362 reviews.
+- Los locales tienen en promedio 89.9 reviews cada uno. El que tiene más reviews cuenta con 4,362.
 
-- Pizza Hut la cadena en que se enfoca este proyecto tiene un promedio de calificación de 3.3 en New Jearsey y 3.7 en New York.
+- Pizza Hut, la cadena en que se enfoca este proyecto, tiene un promedio de calificación de 3.3 en New Jersey y 3.7 en New York.
 
-- A continuación se puede observar la relación entre la cantidad de reviews en Google Map y el promedio de calificaciones, destacando que a mayor número de reviews menor es el número de calificaciones.
+- A continuación, se puede observar la relación entre la cantidad de reviews en Google Map y el promedio de calificaciones, destacando que a mayor número de reviews menor es el número de calificaciones.
 
 ![Reviews](<Assets/Relación Reviews - Puntuaciones.png>)
 
-## Diseño del Modelo Entidad-Relación
-
-![Diagrama](<Assets/Diagrama Entidad-Relación.jpg>)
-
 ## Diccionario de Datos
 
-### Datos provenientes de API
+### Tabla Census
+Datos provenientes de API
 
-![Dic_API](<Assets/Diccionario de Datos API.jpg>)
+| Columna     | Tipo de dato  | Acepta nulos | Descripción |
+|------------|-------------|--------------|-------------|
+| year       | int         | No           | Año en que se realizó el censo |
+| state      | int         | No           | Código del estado al que corresponden los datos |
+| name       | char(50)    | Sí           | Nombre del estado |
+| sector_cod | int         | Sí           | Código del sector de la industria correspondiente a "Restaurants" |
+| sector     | char(20)    | Sí           | Nombre del sector de la industria correspondiente a "Restaurants" |
+| rcptot     | bigint      | Sí           | Importe de ventas o ganancias del sector (en miles de dólares) |
+| emp        | bigint      | Sí           | Cantidad de empleados |
+| estab      | bigint      | Sí           | Cantidad de establecimientos |
 
-### Datos de Reviews Google Maps
 
-![Dic_Rev](<Assets/Diccionario de Datos Reviews.jpg>)
+### Tabla gm_reviews
+Datos de Reviews Google Maps
 
-### Datos de Sitios Google Maps
+| Columna   | Tipo de dato  | Acepta nulos | Descripción |
+|-----------|-------------|--------------|-------------|
+| gmap_id   | char(50)    | No           | Identificador único en Google Maps para el establecimiento |
+| user_id   | double      | No           | Identificador único del usuario que publicó la reseña |
+| date_rev  | datetime(3) | No           | Fecha y hora en que se realizó la reseña |
+| rating    | tinyint     | No           | Calificación del usuario (valores entre 1 y 5) |
+| text_rev  | text        | Sí           | Comentario opcional que publicó el usuario sobre el establecimiento |
 
-![Dic_Sit](<Assets/Diccionario de Datos Sitios.jpg>)
+
+### Tabla gm_sitios
+Datos de Sitios Google Maps
+
+| Columna         | Tipo de dato  | Acepta nulos | Descripción |
+|----------------|-------------|--------------|-------------|
+| gmap_id       | char(50)    | No           | Identificador único de Google Maps |
+| name          | char(100)   | No           | Nombre del establecimiento |
+| street_address| char(100)   | Sí           | Calle y número de la ubicación |
+| city          | char(50)    | No           | Ciudad donde se encuentra el establecimiento |
+| state         | char(2)     | No           | Estado (NJ o NY) |
+| zip_code      | smallint    | No           | Código postal del establecimiento |
+| latitude      | float       | No           | Latitud geográfica |
+| longitude     | float       | No           | Longitud geográfica |
+| avg_rating    | float       | No           | Calificación promedio del establecimiento (1-5) |
+| num_of_reviews| smallint    | No           | Número total de reseñas registradas |
+| price         | char(5)     | Sí           | Rango de precios ($, $$, $$$) |
+| Monday        | char(20)    | Sí           | Horario de atención los días lunes |
+| Tuesday       | char(20)    | Sí           | Horario de atención los días martes |
+| Wednesday     | char(20)    | Sí           | Horario de atención los días miércoles |
+| Thursday      | char(20)    | Sí           | Horario de atención los días jueves |
+| Friday        | char(20)    | Sí           | Horario de atención los días viernes |
+| Saturday      | char(20)    | Sí           | Horario de atención los días sábados |
+| Sunday        | char(20)    | Sí           | Horario de atención los domingos |
+| Delivery      | bit         | No           | Indica si el establecimiento ofrece entrega a domicilio (1 = Sí, 0 = No) |
+| Dine-in       | bit         | Sí           | Indica si sirven comida para consumir en el local (1 = Sí, 0 = No) |
+| Takeout       | bit         | No           | Indica si sirven comida para llevar (1 = Sí, 0 = No) |
+| Good_for_kids | bit         | No           | Indica si es apto para niños (1 = Sí, 0 = No) |
+| Casual        | bit         | No           | Indica si el ambiente es informal (1 = Sí, 0 = No) |
+| Dinner        | bit         | No           | Indica si es un lugar adecuado para cenar (1 = Sí, 0 = No) |
+| Lunch         | bit         | Sí           | Indica si es un lugar adecuado para almorzar (1 = Sí, 0 = No) |
+
+## Modelo Entidad-Relación
+
+![alt text](<Assets/Diagrama Entidad-Relación.png>)
+
+## Pipeline y ETL Automatizado
+### (COMPLETAR)
+
+## Dashboard
+### (COMPLETAR)
+### (Meterle fotos del dashboard y poner el storytelling)
+
+## Modelos Machine Learning
+### (COMPLETAR)
+
+## Estructura del Repositorio <!-- Revisar si se debe actualizar -->
+El repositorio está organizado de la siguiente manera:
+```
+📂 Proyecto-Final
+│── 📂 Assets          # Imágenes y recursos gráficos para documentación y dashboard
+│── 📂 Datos           # Datos sin procesar y procesados
+│── 📂 EDA             # Notebooks y scripts de análisis exploratorio de datos
+│── 📂 Modelos ML      # Modelos de machine learning y scripts relacionados
+│── .gitignore         # Archivos y carpetas que Git debe ignorar
+│── README.md          # Documentación principal del proyecto
+│── requirements.txt   # Lista de dependencias necesarias para ejecutar el proyecto
+```
+<!-- 
+## Instalación y Configuración (Pasos para ejecutar el proyecto y dependencias necesarias)
+### (COMPLETAR)
+-->
+## Conclusión
+### (COMPLETAR)
+
+<!-- 
+(Sugerencia chatgpt para sección conclusiones)
+Aunque falta completar esta parte, debería incluir:
+* Principales hallazgos
+* Limitaciones del análisis
+* Posibles mejoras futuras
+ -->
+
+## Autores y Contacto
+
+Este proyecto fue desarrollado por el siguiente equipo de profesionales en ciencia de datos e ingeniería:
+
+| Nombre            | Rol                           | LinkedIn  | GitHub  |
+|------------------|-----------------------------|-----------|---------|
+| **Facundo Nahuel** | Data Engineer                | [LinkedIn](https://www.linkedin.com/in/facundo-nahuel-serqueira-aba554b/) | [GitHub](https://github.com/nahuelfns) |
+| **Felipe Viera**  | Data Engineer                | [LinkedIn](https://www.linkedin.com/in/felipe-viera-klein-22b357131/) | [GitHub](https://github.com/Vierinsky) |
+| **Victoria Riso** | Data Analyst / Team Leader   | [LinkedIn](https://www.linkedin.com/in/victoria-riso/) | [GitHub](https://github.com/victoriariso) |
+| **Manuel Cozzari** | Data Analyst                | [LinkedIn](https://www.linkedin.com/in/manuel-cozzari/) | [GitHub](https://github.com/MCozzari) |
+| **Kevin Guarda**  | Machine Learning Engineer    | [LinkedIn](https://www.linkedin.com/in/kevin-guarda/) | [GitHub](https://github.com/KevGuarda) |
+
+Si tienes preguntas o sugerencias sobre el proyecto, no dudes en ponerte en contacto con cualquiera de nosotros a través de LinkedIn o GitHub.
+
+
