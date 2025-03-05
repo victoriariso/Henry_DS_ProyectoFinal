@@ -78,7 +78,7 @@ Para este proyecto, elegimos un stack tecnológico basado en **AWS**, ya que ofr
 
 Este stack tecnológico permite un flujo de datos completamente automatizado, optimizando la ingesta, transformación, almacenamiento y análisis, garantizando eficiencia y escalabilidad en la nube.   
 
-![Stack](<Assets/Stack Tecnológico Actualizado.png>)
+![alt text](<Assets/Stack tecnologico.JPG>)
 
 ## KPIs
 
@@ -173,8 +173,61 @@ Datos de Sitios Google Maps
 
 ![alt text](<Assets/Diagrama Entidad-Relación.png>)
 
-## Pipeline y ETL Automatizado
-### (COMPLETAR)
+## Pipeline y ETL Automatizado  
+
+Nuestro **pipeline de datos** está diseñado para operar de manera completamente automatizada, asegurando la actualización y disponibilidad de información en nuestro **Data Warehouse en Amazon RDS**, lo que permite alimentar tanto nuestro **dashboard en Power BI** como nuestros **modelos de Machine Learning**.  
+
+El pipeline se compone de **dos orígenes de datos principales**:  
+
+1. **Google Maps:** Contamos con dos datasets en formato Parquet almacenados en **Amazon S3**, uno con información sobre establecimientos y otro con reseñas de usuarios.  
+2. **API del Censo de EE.UU. (2022):** Proporciona datos demográficos y económicos de **New York y New Jersey**, los cuales reciben una transformación mínima antes de ser cargados directamente en **Amazon RDS**.  
+
+Para la ingesta y procesamiento de estos datos, el pipeline se basa en **tres funciones AWS Lambda**, que automatizan la extracción, transformación y carga (ETL) de la información:  
+
+### **1. Función ETL**  
+**Activación:** Se ejecuta automáticamente cuando un nuevo dataset es subido a la carpeta `input/` del bucket de **Amazon S3**.  
+
+**Proceso:**  
+- Toma el dataset subido (sitios de Google Maps o reseñas de usuarios).  
+- Aplica las transformaciones y normalizaciones necesarias.  
+- Guarda los datos procesados en la carpeta `output/` dentro del mismo bucket de S3.  
+
+**Uso posterior:**  
+- Una vez procesados, los archivos en `output/` serán utilizados por la **Función carga-a-rds** para poblar las tablas del **Data Warehouse en Amazon RDS**.  
+
+### **2. Función Extraccion_censo_ny_nj_2022**  
+**Activación:** Programada para ejecutarse **todos los lunes a las 08:00 AM**.  
+
+**Proceso:**  
+- Se conecta con la **API del Censo de EE.UU. (2022)**.  
+- Aplica una transformación mínima a los datos obtenidos.  
+- Carga los datos procesados directamente en el **Data Warehouse en Amazon RDS**.  
+
+### **3. Función carga-a-rds**  
+**Activación:** Se ejecuta cuando un nuevo archivo es subido a la carpeta `output/` en **Amazon S3**.  
+
+**Proceso:**  
+- Toma los archivos ya transformados y normalizados.  
+- Inserta los datos en las tablas relacionales de **Amazon RDS (MySQL)**.  
+
+**Uso posterior:**  
+- Las tablas en **Amazon RDS** alimentarán tanto nuestro **dashboard en Power BI** como nuestros **modelos de Machine Learning**, asegurando que trabajen con información actualizada.  
+
+### **Flujo de Datos**  
+
+1. Carga de datos en S3 o consulta a la API del Censo.  
+2. La función ETL transforma los datos de Google Maps y los mueve a `output/`.  
+3. La función Extraccion_censo_ny_nj_2022 obtiene y carga datos del censo en RDS.  
+4. La función carga-a-rds sube los datos procesados a Amazon RDS.  
+5. El dashboard en Power BI y los modelos de Machine Learning consumen los datos del Data Warehouse.  
+
+Con este diseño, garantizamos un pipeline de datos **eficiente, escalable y automatizado**, optimizando la ingesta, transformación, almacenamiento y análisis de información.  
+
+
+![alt text](<Assets/Pipeline automatizado.JPG>)
+
+
+<!-- Recordar hacer merge con main -->
 
 ## Dashboard
 ### (COMPLETAR)
