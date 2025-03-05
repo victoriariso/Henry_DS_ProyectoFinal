@@ -28,8 +28,6 @@ Además, se diseñó un **dashboard interactivo en Power BI** que permite visual
 13. [Conclusión](#conclusión)
 14. [Autores y Contacto](#autores-y-contacto)
 
-## Introducción
-
 ## Introducción  
 
 En 2026, Estados Unidos, junto a México y Canadá, será anfitrión de la Copa del Mundo de la FIFA, un evento global que atraerá a más de 3 millones de espectadores y alcanzará una audiencia televisiva de aproximadamente 3.5 mil millones de personas (fuente: FIFA). Entre los estadios seleccionados, el MetLife Stadium, con una capacidad de 82,500 espectadores, será sede de siete partidos, incluyendo cuatro de la fase de grupos, uno de dieciseisavos de final, uno de cuartos de final y, sobre todo, la gran final del torneo.  
