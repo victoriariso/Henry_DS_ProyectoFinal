@@ -10,10 +10,10 @@ app = FastAPI()
 
 # Cargar modelos y datos de forma segura
 try:
-    modelo_sentimientos_final = joblib.load(r'C:\Users\guard\OneDrive\Desktop\Henry Data Science\Proyecto-FInal\Modelos ML\modelo_sentimientos_final.pkl')
-    vectorizer = joblib.load(r'C:\Users\guard\OneDrive\Desktop\Henry Data Science\Proyecto-FInal\Modelos ML\vectorizador_tfidf.pkl')
-    modelo_knn = joblib.load(r'C:\Users\guard\OneDrive\Desktop\Henry Data Science\Proyecto-FInal\Modelos ML\modelo_knn.pkl')
-    df = pd.read_csv(r'C:\Users\guard\OneDrive\Desktop\Henry Data Science\Proyecto-FInal\Modelos ML\data_recomendacion.csv')
+    modelo_sentimientos_final = joblib.load("/Modelos ML/modelo_sentimientos_final.pkl")
+    vectorizer = joblib.load("/Modelos ML/vectorizador_tfidk.pkl")
+    modelo_knn = joblib.load("/Modelos ML/modelo_knn.pkl")
+    df = pd.read_csv("/Modelos ML/data_recomendacion.csv", sep=",")
 except Exception as e:
     raise RuntimeError(f"Error al cargar modelos o datos: {str(e)}")
 
