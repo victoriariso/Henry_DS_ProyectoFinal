@@ -13,7 +13,7 @@ vectorizer = joblib.load(r'C:\Users\guard\OneDrive\Desktop\Henry Data Science\Pr
 
 # Cargar modelo y datos para recomendaciones
 modelo_knn = joblib.load(r'C:\Users\guard\OneDrive\Desktop\Henry Data Science\Proyecto-FInal\Modelos ML\modelo_knn.pkl')
-df_binarias = pd.read_csv(r'C:\Users\guard\OneDrive\Desktop\Henry Data Science\Proyecto-FInal\Modelos ML\data_preprocesada.csv')
+df = pd.read_csv(r'C:\Users\guard\OneDrive\Desktop\Henry Data Science\Proyecto-FInal\Modelos ML\data_recomendacion.csv')
 
 # Clase para el cuerpo de la petición de análisis de sentimientos
 class Comentario(BaseModel):
@@ -34,40 +34,44 @@ def clasificar_comentario(texto: str):
     prediccion = modelo_sentimientos_final.predict(texto_tfidf)[0]
     return {"sentimiento": prediccion}
 
-# Endpoint para recomendar locales
-@app.get("/recomendar_locales")
-def recomendar_locales(
-    horario: str = Query(..., description="Horario en formato 'HH:MM-HH:MM'"),
-    delivery: Optional[int] = Query(0, ge=0, le=1, description="1 si el local tiene entrega a domicilio, 0 si no"),
-    dine_in: Optional[int] = Query(0, ge=0, le=1, description="1 si el local tiene opción para comer en el lugar, 0 si no"),
-    takeout: Optional[int] = Query(0, ge=0, le=1, description="1 si el local tiene opción para llevar, 0 si no"),
-    good_for_kids: Optional[int] = Query(0, ge=0, le=1, description="1 si el local es adecuado para niños, 0 si no"),
-    casual: Optional[int] = Query(0, ge=0, le=1, description="1 si el local tiene ambiente casual, 0 si no"),
-    dinner: Optional[int] = Query(0, ge=0, le=1, description="1 si el local sirve cenas, 0 si no"),
-    lunch: Optional[int] = Query(0, ge=0, le=1, description="1 si el local sirve almuerzos, 0 si no"),
-    zip_code: str = Query(..., description="Código postal de la ubicación del usuario")
+# Verificar las columnas del DataFrame
+print(df.columns)
+
+class Recomendacion(BaseModel):
+    name: str
+    street_address: str
+    zip_code: str
+    num_of_reviews: int
+    avg_rating: float
+    mensaje: str
+
+# Endpoint para recomendar restaurantes
+@app.get("/recomendar_restaurantes", response_model=List[Recomendacion])
+def recomendar_restaurantes(
+    zip_code: str = Query(..., description="Código postal de la ubicación del usuario"),
+    dia: str = Query(..., description="Día de la semana (Monday, Tuesday, etc.)"),
+    hora: float = Query(..., description="Hora en formato decimal (por ejemplo, 14.5 para 14:30)")
 ):
-    # Convertir horario a formato de 24 horas
-    try:
-        horario_inicio, horario_fin = horario.split('-')
-    except ValueError:
-        return {"error": "Formato de horario inválido. Usa 'HH:MM-HH:MM'."}
+    # Filtrar los restaurantes por el código postal
+    df_filtrado = df[df['zip_code'] == zip_code]
     
-    # Filtrar locales abiertos en el horario especificado y por código postal
-    df_filtrado = df_binarias[df_binarias['zip_code'] == zip_code]
+    # Convertir las columnas de horarios a formato numérico
+    df_filtrado[f'{dia}_open'] = pd.to_numeric(df_filtrado[f'{dia}_open'], errors='coerce')
+    df_filtrado[f'{dia}_close'] = pd.to_numeric(df_filtrado[f'{dia}_close'], errors='coerce')
     
-    # Crear vector de consulta
-    consulta = [delivery, dine_in, takeout, good_for_kids, casual, dinner, lunch]
+    # Filtrar los restaurantes por la hora de apertura y cierre
+    df_filtrado = df_filtrado[(df_filtrado[f'{dia}_open'] <= hora) & (df_filtrado[f'{dia}_close'] >= hora)]
     
-    while len(consulta) < 21:
-        consulta.append(0)  # Agrega un valor predeterminado (0 en este caso) para las características faltantes
+    # Seleccionar los 10 restaurantes con mayor número de comentarios
+    top_10_reviews = df_filtrado.nlargest(10, 'num_of_reviews')
+    print(f"Top 10 por num_of_reviews: {len(top_10_reviews)} registros encontrados")
     
-    consulta = pd.Series(consulta).values.reshape(1, -1)
+    # Seleccionar los 5 restaurantes con mayor puntuación promedio
+    top_5_rating = top_10_reviews.nlargest(5, 'avg_rating')
     
-    # Encontrar vecinos más cercanos
-    distancias, indices = modelo_knn.kneighbors(consulta)
-    recomendaciones = df_filtrado.iloc[indices[0]]
-    
-    # Ordenar por num_of_reviews y avg_rating
-    recomendaciones = recomendaciones.sort_values(by=['num_of_reviews', 'avg_rating'], ascending=[False, False])
-    return recomendaciones[['name', 'avg_rating', 'num_of_reviews', 'latitude', 'longitude', 'zip_code']].to_dict(orient='records')
+    # Formatear la respuesta
+    for index, row in top_5_rating.iterrows():
+        print(f"El restaurante '{row['name']}', ubicado en '{row['street_address']}', posee {row['num_of_reviews']} comentarios, y el promedio de su puntuación es {row['avg_rating']}.")
+
+
+    return recomendar_restaurantes
