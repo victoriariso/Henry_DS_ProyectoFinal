@@ -42,6 +42,19 @@ Este proyecto tiene como objetivo identificar la mejor ubicación en las inmedia
 
 - Crear un sistema de recomendación de restaurante para los clientes en la zona de New Jersey.
 
+## Estructura del Repositorio <!-- Revisar si se debe actualizar -->
+El repositorio está organizado de la siguiente manera:
+```
+📂 Proyecto-Final
+│── 📂 Assets          # Imágenes y recursos gráficos para documentación y dashboard
+│── 📂 Datos           # Datos sin procesar y procesados
+│── 📂 EDA             # Notebooks y scripts de análisis exploratorio de datos
+│── 📂 Modelos ML      # Modelos de machine learning y scripts relacionados
+│── .gitignore         # Archivos y carpetas que Git debe ignorar
+│── README.md          # Documentación principal del proyecto
+│── requirements.txt   # Lista de dependencias necesarias para ejecutar el proyecto
+```
+
 ## Datos Utilizados  
 
 Los datos empleados han sido extraídos de las siguientes fuentes:  
@@ -226,32 +239,18 @@ Con este diseño, garantizamos un pipeline de datos **eficiente, escalable y aut
 
 ![alt text](<Assets/Pipeline automatizado.JPG>)
 
-
-<!-- Recordar hacer merge con main -->
-
 ## Dashboard
 ### (COMPLETAR)
-### (Meterle fotos del dashboard y poner el storytelling)
+<!-- Meterle fotos del dashboard y poner el storytelling -->
 
-## Modelos Machine Learning
-### (COMPLETAR)
+## Modelos de Machine Learning
 
-## Estructura del Repositorio <!-- Revisar si se debe actualizar -->
-El repositorio está organizado de la siguiente manera:
-```
-📂 Proyecto-Final
-│── 📂 Assets          # Imágenes y recursos gráficos para documentación y dashboard
-│── 📂 Datos           # Datos sin procesar y procesados
-│── 📂 EDA             # Notebooks y scripts de análisis exploratorio de datos
-│── 📂 Modelos ML      # Modelos de machine learning y scripts relacionados
-│── .gitignore         # Archivos y carpetas que Git debe ignorar
-│── README.md          # Documentación principal del proyecto
-│── requirements.txt   # Lista de dependencias necesarias para ejecutar el proyecto
-```
-<!-- 
-## Instalación y Configuración (Pasos para ejecutar el proyecto y dependencias necesarias)
-### (COMPLETAR)
--->
+### Análisis de sentimientos
+(COMPLETAR)
+
+### Sistema de recomendación
+(COMPLETAR)
+
 ## Conclusión
 ### (COMPLETAR)
 
@@ -263,18 +262,15 @@ Aunque falta completar esta parte, debería incluir:
 * Posibles mejoras futuras
  -->
 
-## Autores y Contacto
+## Autores y Contacto  
 
-Este proyecto fue desarrollado por el siguiente equipo de profesionales en ciencia de datos e ingeniería:
+Este proyecto fue desarrollado por el siguiente equipo de profesionales en ciencia de datos e ingeniería.
 
-| Nombre            | Rol                           | LinkedIn  | GitHub  |
-|------------------|-----------------------------|-----------|---------|
-| **Facundo Nahuel** | Data Engineer                | [LinkedIn](https://www.linkedin.com/in/facundo-nahuel-serqueira-aba554b/) | [GitHub](https://github.com/nahuelfns) |
-| **Felipe Viera**  | Data Engineer                | [LinkedIn](https://www.linkedin.com/in/felipe-viera-klein-22b357131/) | [GitHub](https://github.com/Vierinsky) |
-| **Victoria Riso** | Data Analyst / Team Leader   | [LinkedIn](https://www.linkedin.com/in/victoria-riso/) | [GitHub](https://github.com/victoriariso) |
-| **Manuel Cozzari** | Data Analyst                | [LinkedIn](https://www.linkedin.com/in/manuel-cozzari/) | [GitHub](https://github.com/MCozzari) |
-| **Kevin Guarda**  | Machine Learning Engineer    | [LinkedIn](https://www.linkedin.com/in/kevin-guarda/) | [GitHub](https://github.com/KevGuarda) |
-
-Si tienes preguntas o sugerencias sobre el proyecto, no dudes en ponerte en contacto con cualquiera de nosotros a través de LinkedIn o GitHub.
-
+|| Nombre | Rol | LinkedIn | GitHub |
+|------|--------|-----|----------|--------|
+| ![Victoria Riso](Assets\Victoria_Riso_Foto_150.png) | **Victoria Riso** | Data Analyst / Team Leader | [LinkedIn](https://www.linkedin.com/in/victoria-riso/) | [GitHub](https://github.com/victoriariso) |
+| ![Manuel Cozzari](Assets\Manuel_Cozzari_Foto_150.png) | **Manuel Cozzari** | Data Analyst | [LinkedIn](https://www.linkedin.com/in/manuel-cozzari/) | [GitHub](https://github.com/MCozzari) |
+| ![Facundo Nahuel](Assets\Facundo_Nahuel_Foto_150.png) | **Facundo Nahuel** | Data Engineer | [LinkedIn](https://www.linkedin.com/in/facundo-nahuel-serqueira-aba554b/) | [GitHub](https://github.com/nahuelfns) |
+| ![Felipe Viera](Assets\Felipe_Viera_Foto_150.png) | **Felipe Viera** | Data Engineer | [LinkedIn](https://www.linkedin.com/in/felipe-viera-klein-22b357131/) | [GitHub](https://github.com/Vierinsky) |
+| ![Kevin Guarda](Assets\Kevin_Guarda_Foto_150.png) | **Kevin Guarda** | Machine Learning Engineer | [LinkedIn](https://www.linkedin.com/in/kevin-guarda/) | [GitHub](https://github.com/KevGuarda) |
 
