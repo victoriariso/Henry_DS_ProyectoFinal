@@ -245,11 +245,99 @@ Con este diseño, garantizamos un pipeline de datos **eficiente, escalable y aut
 
 ## Modelos de Machine Learning
 
-### Análisis de sentimientos
-(COMPLETAR)
+### 1. Análisis de sentimientos con VADER
 
-### Sistema de recomendación
-(COMPLETAR)
+Este módulo realiza un análisis de sentimientos utilizando **VADER Sentiment Analyzer**, un modelo basado en reglas diseñado para evaluar el tono emocional de textos cortos.
+
+#### Modelo Utilizado
+
+- **VADER Sentiment Analyzer**: Evalúa la polaridad del texto (positivo, negativo o neutro) a partir de puntuaciones predefinidas.
+- **TF-IDF Vectorizer**: Convierte el texto en representaciones numéricas para posibles análisis adicionales.
+
+#### Proceso
+
+1. **Carga de Datos**: Se lee un archivo **Parquet** con comentarios de usuarios.
+2. **Preprocesamiento**: Se eliminan valores nulos en la columna **text**.
+3. **Análisis de Sentimiento**:
+   - Se obtiene la puntuación de sentimiento (**compound**) con VADER.
+   - Se categorizan los comentarios como **positivo**, **negativo** o **neutro**.
+
+#### Ejemplo de Resultados <!-- REVISAR Y CORREGIR -->
+
+Un usuario escribe el texto:
+
+"we had a great day. The pizza was delicious."
+
+Por lo que el modelo responde con el sentimiento del comentario en formato JSON de la siguiente manera:
+
+```
+{
+  "sentimiento": "positivo"
+}
+```
+
+### 2. Sistema de recomendación
+
+#### Sistema de Recomendación de Restaurantes
+
+Este módulo implementa un **sistema de recomendación de restaurantes** utilizando el algoritmo **K-Nearest Neighbors (KNN)** para encontrar lugares similares en base a características preprocesadas.
+
+#### Modelo Utilizado
+
+- **K-Nearest Neighbors (KNN)**: Encuentra restaurantes similares basándose en distancias en un espacio vectorial.
+- **FastAPI**: Se utiliza para exponer el sistema de recomendación como un servicio API.
+- **Joblib**: Para guardar y cargar modelos previamente entrenados.
+
+#### Proceso
+
+1. **Carga de Datos**: Se lee un archivo **Parquet** con información de restaurantes.
+2. **Preprocesamiento**:
+   - Se limpian los datos y se convierten a un formato adecuado.
+   - Se extraen características relevantes para el modelo.
+3. **Entrenamiento del Modelo**:
+   - Se utiliza KNN para encontrar restaurantes similares.
+   - Se ajustan los parámetros óptimos según los datos disponibles.
+4. **Despliegue con FastAPI**:
+   - Se crea un endpoint que recibe datos y devuelve recomendaciones de restaurantes.
+
+#### Ejemplo de Uso <!-- REVISAR Y CORREGIR -->
+
+Un usuario solicita recomendaciones enviando una consulta con la información:
+
+* zip_code: 11220
+* dia: "Tuesday"
+* hora: 16.0
+
+El sistema responderá con una lista de 3 lugares similares que cumplan esas características, en formato JSON, de la siguiente manera:
+
+```
+[
+  {
+    "name": "Charles Pizzeria",
+    "street_address": "4910 5th Ave",
+    "zip_code": "11220",
+    "num_of_reviews": 218,
+    "avg_rating": 4.5,
+    "mensaje": "El restaurante 'Charles Pizzeria', ubicado en '4910 5th Ave', posee 218.0 comentarios, y el promedio de su puntuación es 4.5."
+  },
+  {
+    "name": "Rax's Pizza",
+    "street_address": "4613 5th Ave",
+    "zip_code": "11220",
+    "num_of_reviews": 28,
+    "avg_rating": 4.1,
+    "mensaje": "El restaurante 'Rax's Pizza', ubicado en '4613 5th Ave', posee 28.0 comentarios, y el promedio de su puntuación es 4.1."
+  },
+  {
+    "name": "Tony's Pizza",
+    "street_address": "6112 4th Ave",
+    "zip_code": "11220",
+    "num_of_reviews": 28,
+    "avg_rating": 3.9,
+    "mensaje": "El restaurante 'Tony's Pizza', ubicado en '6112 4th Ave', posee 28.0 comentarios, y el promedio de su puntuación es 3.9."
+  }
+]
+```
 
 ## Conclusión
 ### (COMPLETAR)
