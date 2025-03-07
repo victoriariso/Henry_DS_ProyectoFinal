@@ -354,76 +354,51 @@ Aunque falta completar esta parte, debería incluir:
 
 Este proyecto fue desarrollado por el siguiente equipo de profesionales en ciencia de datos e ingeniería:
 
-<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; margin-top: 30px;">
-
 <!-- Primera fila (3 integrantes) -->
-<div style="display: flex; justify-content: center; gap: 40px;">
-
-  <!-- Victoria Riso -->
-  <div style="text-align: center; max-width: 250px;">
-    <img src="Assets/Victoria_Riso_Foto_150.png" width="150" style="border-radius: 50%;">
-    <h3>Victoria Riso</h3>
-    <p><b>Data Analyst / Team Leader</b></p>
-    <p>
+<table align="center">
+  <tr>
+    <td align="center">
+      <img src="Assets/Victoria_Riso_Foto_150.png" width="150" style="border-radius:50%"><br>
+      <b>Victoria Riso</b><br>
+      Data Analyst / Team Leader<br>
       <a href="https://www.linkedin.com/in/victoria-riso/">🔗 LinkedIn</a> |
       <a href="https://github.com/victoriariso">🐙 GitHub</a>
-    </p>
-  </div>
-
-  <!-- Manuel Cozzari -->
-  <div style="text-align: center; max-width: 250px;">
-    <img src="Assets/Manuel_Cozzari_Foto_150.png" width="150" style="border-radius: 50%;">
-    <h3>Manuel Cozzari</h3>
-    <p><b>Data Analyst</b></p>
-    <p>
+    </td>
+    <td align="center">
+      <img src="Assets/Manuel_Cozzari_Foto_150.png" width="150" style="border-radius:50%"><br>
+      <b>Manuel Cozzari</b><br>
+      Data Analyst<br>
       <a href="https://www.linkedin.com/in/manuel-cozzari/">🔗 LinkedIn</a> |
       <a href="https://github.com/MCozzari">🐙 GitHub</a>
-    </p>
-  </div>
-
-  <!-- Facundo Nahuel -->
-  <div style="text-align: center; max-width: 250px;">
-    <img src="Assets/Facundo_Nahuel_Foto_150.png" width="150" style="border-radius: 50%;">
-    <h3>Facundo Nahuel</h3>
-    <p><b>Data Engineer</b></p>
-    <p>
+    </td>
+    <td align="center">
+      <img src="Assets/Facundo_Nahuel_Foto_150.png" width="150" style="border-radius:50%"><br>
+      <b>Facundo Nahuel</b><br>
+      Data Engineer<br>
       <a href="https://www.linkedin.com/in/facundo-nahuel-serqueira-aba554b/">🔗 LinkedIn</a> |
       <a href="https://github.com/nahuelfns">🐙 GitHub</a>
-    </p>
-  </div>
-
-</div>
+    </td>
+  </tr>
+</table>
 
 <!-- Segunda fila (2 integrantes) -->
-<div style="display: flex; justify-content: center; gap: 40px; margin-top: 20px;">
-
-  <!-- Felipe Viera -->
-  <div style="text-align: center; max-width: 250px;">
-    <img src="Assets/Felipe_Viera_Foto_150.png" width="150" style="border-radius: 50%;">
-    <h3>Felipe Viera</h3>
-    <p><b>Data Engineer</b></p>
-    <p>
+<table align="center">
+  <tr>
+    <td align="center">
+      <img src="Assets/Felipe_Viera_Foto_150.png" width="150" style="border-radius:50%"><br>
+      <b>Felipe Viera</b><br>
+      Data Engineer<br>
       <a href="https://www.linkedin.com/in/felipe-viera-klein-22b357131/">🔗 LinkedIn</a> |
       <a href="https://github.com/Vierinsky">🐙 GitHub</a>
-    </p>
-  </div>
-
-  <!-- Kevin Guarda -->
-  <div style="text-align: center; max-width: 250px;">
-    <img src="Assets/Kevin_Guarda_Foto_150.png" width="150" style="border-radius: 50%;">
-    <h3>Kevin Guarda</h3>
-    <p><b>Machine Learning Engineer</b></p>
-    <p>
+    </td>
+    <td align="center">
+      <img src="Assets/Kevin_Guarda_Foto_150.png" width="150" style="border-radius:50%"><br>
+      <b>Kevin Guarda</b><br>
+      Machine Learning Engineer<br>
       <a href="https://www.linkedin.com/in/kevin-guarda/">🔗 LinkedIn</a> |
       <a href="https://github.com/KevGuarda">🐙 GitHub</a>
-    </p>
-  </div>
-
-</div>
-
-</div>
+    </td>
+  </tr>
+</table>
 
 ---
-
-
-
