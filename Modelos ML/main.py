@@ -1,73 +1,99 @@
-from fastapi import FastAPI, Query
+from fastapi import FastAPI, Query, HTTPException
 from pydantic import BaseModel
-from typing import List, Optional
+from typing import List
 import joblib
 import pandas as pd
+import os
 
 # Inicializar FastAPI
 app = FastAPI()
 
-# Cargar el modelo de análisis de sentimientos
-modelo_sentimientos_final = joblib.load(r'C:\Users\guard\OneDrive\Desktop\Henry Data Science\Proyecto-FInal\Modelos ML\modelo_sentimientos_final.pkl')
-vectorizer = joblib.load(r'C:\Users\guard\OneDrive\Desktop\Henry Data Science\Proyecto-FInal\Modelos ML\vectorizador_tfidf.pkl')
+# Cargar modelos y datos de forma segura
+try:
+    modelo_sentimientos_final = joblib.load("/Modelos ML/modelo_sentimientos_final.pkl")
+    vectorizer = joblib.load("/Modelos ML/vectorizador_tfidk.pkl")
+    modelo_knn = joblib.load("/Modelos ML/modelo_knn.pkl")
+    df = pd.read_csv("/Modelos ML/data_recomendacion.csv", sep=",")
+except Exception as e:
+    raise RuntimeError(f"Error al cargar modelos o datos: {str(e)}")
 
-# Cargar modelo y datos para recomendaciones
-modelo_knn = joblib.load(r'C:\Users\guard\OneDrive\Desktop\Henry Data Science\Proyecto-FInal\Modelos ML\modelo_knn.pkl')
-df_binarias = pd.read_csv(r'C:\Users\guard\OneDrive\Desktop\Henry Data Science\Proyecto-FInal\Modelos ML\data_preprocesada.csv')
+# Asegurar que zip_code sea string
+df['zip_code'] = df['zip_code'].astype(str)
 
 # Clase para el cuerpo de la petición de análisis de sentimientos
 class Comentario(BaseModel):
     texto: str
 
-# Clase para el cuerpo de la petición de recomendaciones
-class Consulta(BaseModel):
-    horario: str
-    condiciones_binarias: List[int]
+# Clase para la respuesta de recomendaciones
+class Recomendacion(BaseModel):
+    name: str
+    street_address: str
     zip_code: str
+    num_of_reviews: int
+    avg_rating: float
+    mensaje: str
 
 # Endpoint para análisis de sentimientos
 @app.get("/clasificar_comentario")
 def clasificar_comentario(texto: str):
-    # Vectorizar el comentario
-    texto_tfidf = vectorizer.transform([texto])
-    # Predecir el sentimiento
-    prediccion = modelo_sentimientos_final.predict(texto_tfidf)[0]
-    return {"sentimiento": prediccion}
-
-# Endpoint para recomendar locales
-@app.get("/recomendar_locales")
-def recomendar_locales(
-    horario: str = Query(..., description="Horario en formato 'HH:MM-HH:MM'"),
-    delivery: Optional[int] = Query(0, ge=0, le=1, description="1 si el local tiene entrega a domicilio, 0 si no"),
-    dine_in: Optional[int] = Query(0, ge=0, le=1, description="1 si el local tiene opción para comer en el lugar, 0 si no"),
-    takeout: Optional[int] = Query(0, ge=0, le=1, description="1 si el local tiene opción para llevar, 0 si no"),
-    good_for_kids: Optional[int] = Query(0, ge=0, le=1, description="1 si el local es adecuado para niños, 0 si no"),
-    casual: Optional[int] = Query(0, ge=0, le=1, description="1 si el local tiene ambiente casual, 0 si no"),
-    dinner: Optional[int] = Query(0, ge=0, le=1, description="1 si el local sirve cenas, 0 si no"),
-    lunch: Optional[int] = Query(0, ge=0, le=1, description="1 si el local sirve almuerzos, 0 si no"),
-    zip_code: str = Query(..., description="Código postal de la ubicación del usuario")
-):
-    # Convertir horario a formato de 24 horas
     try:
-        horario_inicio, horario_fin = horario.split('-')
-    except ValueError:
-        return {"error": "Formato de horario inválido. Usa 'HH:MM-HH:MM'."}
+        texto_tfidf = vectorizer.transform([texto])
+        prediccion = modelo_sentimientos_final.predict(texto_tfidf)[0]
+        return {"sentimiento": prediccion}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error en la predicción: {str(e)}")
+
+# Endpoint para recomendar restaurantes
+@app.get("/recomendar_restaurantes", response_model=List[Recomendacion])
+def recomendar_restaurantes(
+    zip_code: str = Query(..., description="Código postal de la ubicación del usuario"),
+    dia: str = Query(..., description="Día de la semana (Monday, Tuesday, etc.)"),
+    hora: float = Query(..., description="Hora en formato decimal (por ejemplo, 14.5 para 14:30)")
+):
+    try:
+        print(f"Total de registros en df: {len(df)}")
+        print(f"Filtrando por zip_code={zip_code}")
+        df_filtrado = df[df['zip_code'] == zip_code]
+        print(f"Registros tras filtrar por zip_code={zip_code}: {len(df_filtrado)}")
+
+        if df_filtrado.empty:
+            raise HTTPException(status_code=404, detail="No se encontraron restaurantes para ese código postal.")
+
+        # Convertir las columnas de horarios a formato numérico
+        if f'{dia}_open' not in df.columns or f'{dia}_close' not in df.columns:
+            raise HTTPException(status_code=400, detail=f"Las columnas de horario para {dia} no existen en los datos.")
+
+        df_filtrado[f'{dia}_open'] = pd.to_numeric(df_filtrado[f'{dia}_open'], errors='coerce')
+        df_filtrado[f'{dia}_close'] = pd.to_numeric(df_filtrado[f'{dia}_close'], errors='coerce')
+        print(f"Registros antes de filtrar por horario: {len(df_filtrado)}")
+        df_filtrado = df_filtrado[(df_filtrado[f'{dia}_open'] <= hora) & (df_filtrado[f'{dia}_close'] >= hora)]
+        print(f"Registros después de filtrar por horario: {len(df_filtrado)}")
+
+        if df_filtrado.empty:
+            raise HTTPException(status_code=404, detail="No se encontraron restaurantes abiertos en ese horario.")
+
+        # Seleccionar los 10 restaurantes con más reseñas
+        top_10_reviews = df_filtrado.nlargest(10, 'num_of_reviews')
+        print(f"Top 10 por num_of_reviews: {len(top_10_reviews)} registros encontrados")
+        
+        # Seleccionar los 5 con mejor rating
+        top_5_rating = top_10_reviews.nlargest(5, 'avg_rating')
+
+        resultado = [
+            Recomendacion(
+                name=row['name'],
+                street_address=row['street_address'],
+                zip_code=row['zip_code'],
+                num_of_reviews=row['num_of_reviews'],
+                avg_rating=row['avg_rating'],
+                mensaje=f"El restaurante '{row['name']}', ubicado en '{row['street_address']}', posee {row['num_of_reviews']} comentarios, y el promedio de su puntuación es {row['avg_rating']}."
+            )
+            for _, row in top_5_rating.iterrows()
+        ]
+
+        return resultado
     
-    # Filtrar locales abiertos en el horario especificado y por código postal
-    df_filtrado = df_binarias[df_binarias['zip_code'] == zip_code]
-    
-    # Crear vector de consulta
-    consulta = [delivery, dine_in, takeout, good_for_kids, casual, dinner, lunch]
-    
-    while len(consulta) < 21:
-        consulta.append(0)  # Agrega un valor predeterminado (0 en este caso) para las características faltantes
-    
-    consulta = pd.Series(consulta).values.reshape(1, -1)
-    
-    # Encontrar vecinos más cercanos
-    distancias, indices = modelo_knn.kneighbors(consulta)
-    recomendaciones = df_filtrado.iloc[indices[0]]
-    
-    # Ordenar por num_of_reviews y avg_rating
-    recomendaciones = recomendaciones.sort_values(by=['num_of_reviews', 'avg_rating'], ascending=[False, False])
-    return recomendaciones[['name', 'avg_rating', 'num_of_reviews', 'latitude', 'longitude', 'zip_code']].to_dict(orient='records')
+    except HTTPException as e:
+        raise e  # Devolver errores personalizados sin cambios
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error en la recomendación: {str(e)}")
