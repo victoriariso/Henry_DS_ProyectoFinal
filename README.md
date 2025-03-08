@@ -198,15 +198,15 @@ El pipeline se compone de **dos orígenes de datos principales**:
 Para la ingesta y procesamiento de estos datos, el pipeline se basa en **tres funciones AWS Lambda**, que automatizan la extracción, transformación y carga (ETL) de la información:  
 
 ### **1. Función ETL**  
-**Activación:** Se ejecuta automáticamente cuando un nuevo dataset es subido a la carpeta `input/` del bucket de **Amazon S3**.  
+**Activación:** Se ejecuta automáticamente cuando un nuevo dataset es subido a la carpeta **input/** del bucket de **Amazon S3**.  
 
 **Proceso:**  
 - Toma el dataset subido (sitios de Google Maps o reseñas de usuarios).  
 - Aplica las transformaciones y normalizaciones necesarias.  
-- Guarda los datos procesados en la carpeta `output/` dentro del mismo bucket de S3.  
+- Guarda los datos procesados en la carpeta **output/** dentro del mismo bucket de S3.  
 
 **Uso posterior:**  
-- Una vez procesados, los archivos en `output/` serán utilizados por la **Función carga-a-rds** para poblar las tablas del **Data Warehouse en Amazon RDS**.  
+- Una vez procesados, los archivos en **output/** serán utilizados por la **Función carga-a-rds** para poblar las tablas del **Data Warehouse en Amazon RDS**.  
 
 ### **2. Función Extraccion_censo_ny_nj_2022**  
 **Activación:** Programada para ejecutarse **todos los lunes a las 08:00 AM**.  
@@ -217,7 +217,7 @@ Para la ingesta y procesamiento de estos datos, el pipeline se basa en **tres fu
 - Carga los datos procesados directamente en el **Data Warehouse en Amazon RDS**.  
 
 ### **3. Función carga-a-rds**  
-**Activación:** Se ejecuta cuando un nuevo archivo es subido a la carpeta `output/` en **Amazon S3**.  
+**Activación:** Se ejecuta cuando un nuevo archivo es subido a la carpeta **output/** en **Amazon S3**.  
 
 **Proceso:**  
 - Toma los archivos ya transformados y normalizados.  
@@ -229,7 +229,7 @@ Para la ingesta y procesamiento de estos datos, el pipeline se basa en **tres fu
 ### **Flujo de Datos**  
 
 1. Carga de datos en S3 o consulta a la API del Censo.  
-2. La función ETL transforma los datos de Google Maps y los mueve a `output/`.  
+2. La función ETL transforma los datos de Google Maps y los mueve a **output/**.  
 3. La función Extraccion_censo_ny_nj_2022 obtiene y carga datos del censo en RDS.  
 4. La función carga-a-rds sube los datos procesados a Amazon RDS.  
 5. El dashboard en Power BI y los modelos de Machine Learning consumen los datos del Data Warehouse.  
