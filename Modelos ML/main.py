@@ -1,3 +1,4 @@
+# Este código es para usar con FASTAPI + Render
 # Para ejecutar entrar a: http://127.0.0.1:8000/docs
 # Estamos probando con : 11220, Tuesday, 16.0
 
