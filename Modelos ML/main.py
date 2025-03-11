@@ -1,4 +1,8 @@
+# Para ejecutar entrar a: http://127.0.0.1:8000/docs
+# Estamos probando con : 11220, Tuesday, 16.0
+
 from fastapi import FastAPI, Query, HTTPException
+from fastapi.responses import RedirectResponse
 from pydantic import BaseModel
 from typing import List
 import joblib
@@ -8,14 +12,38 @@ import os
 # Inicializar FastAPI
 app = FastAPI()
 
+# Definir la ruta base del proyecto
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+MODELS_DIR = os.path.join(BASE_DIR, "Modelos_ML")
+
+# Verificar si la carpeta de modelos existe
+if not os.path.exists(MODELS_DIR):
+    raise RuntimeError(f"❌ ERROR: La carpeta de modelos '{MODELS_DIR}' no existe.")
+
+# Función para cargar modelos y archivos CSV
+def load_model(file_name):
+    path = os.path.join(MODELS_DIR, file_name)
+    if not os.path.exists(path):
+        raise FileNotFoundError(f"❌ ERROR: Archivo no encontrado: {path}")
+    return joblib.load(path)
+
+def load_csv(file_name):
+    path = os.path.join(MODELS_DIR, file_name)
+    if not os.path.exists(path):
+        raise FileNotFoundError(f"❌ ERROR: Archivo no encontrado: {path}")
+    return pd.read_csv(path)
+
 # Cargar modelos y datos de forma segura
 try:
-    modelo_sentimientos_final = joblib.load("Modelos ML/modelo_sentimientos_final.pkl")
-    vectorizer = joblib.load("Modelos ML/vectorizador_tfidk.pkl")
-    modelo_knn = joblib.load("Modelos ML/modelo_knn.pkl")
-    df = pd.read_csv("Modelos ML/data_recomendacion.csv", sep=",")
+    print("📂 Contenido de Modelos_ML:", os.listdir(MODELS_DIR))  # Para depuración en Render
+
+    modelo_sentimientos_final = load_model("modelo_sentimientos_final.pkl")
+    vectorizer = load_model("vectorizador_tfidf.pkl")
+    modelo_knn = load_model("modelo_knn.pkl")
+    df = load_csv("data_recomendacion.csv")
+
 except Exception as e:
-    raise RuntimeError(f"Error al cargar modelos o datos: {str(e)}")
+    raise RuntimeError(f"⚠️ Error al cargar modelos o datos: {str(e)}")
 
 # Asegurar que zip_code sea string
 df['zip_code'] = df['zip_code'].astype(str)
@@ -32,6 +60,11 @@ class Recomendacion(BaseModel):
     num_of_reviews: int
     avg_rating: float
     mensaje: str
+
+# Endpoint raíz
+@app.get("/")
+def read_root():
+    return RedirectResponse(url="/docs")
 
 # Endpoint para análisis de sentimientos
 @app.get("/clasificar_comentario")
@@ -51,31 +84,33 @@ def recomendar_restaurantes(
     hora: float = Query(..., description="Hora en formato decimal (por ejemplo, 14.5 para 14:30)")
 ):
     try:
-        print(f"Total de registros en df: {len(df)}")
-        print(f"Filtrando por zip_code={zip_code}")
+        print(f"✅ Total de registros en df: {len(df)}")
+        print(f"🔎 Filtrando por zip_code={zip_code}")
         df_filtrado = df[df['zip_code'] == zip_code]
-        print(f"Registros tras filtrar por zip_code={zip_code}: {len(df_filtrado)}")
+        print(f"📊 Registros tras filtrar por zip_code={zip_code}: {len(df_filtrado)}")
 
         if df_filtrado.empty:
             raise HTTPException(status_code=404, detail="No se encontraron restaurantes para ese código postal.")
 
-        # Convertir las columnas de horarios a formato numérico
+        # Verificar si las columnas de horario existen
         if f'{dia}_open' not in df.columns or f'{dia}_close' not in df.columns:
             raise HTTPException(status_code=400, detail=f"Las columnas de horario para {dia} no existen en los datos.")
 
-        df_filtrado[f'{dia}_open'] = pd.to_numeric(df_filtrado[f'{dia}_open'], errors='coerce')
-        df_filtrado[f'{dia}_close'] = pd.to_numeric(df_filtrado[f'{dia}_close'], errors='coerce')
-        print(f"Registros antes de filtrar por horario: {len(df_filtrado)}")
+        # Convertir las columnas de horarios a formato numérico
+        df_filtrado.loc[:, f'{dia}_open'] = pd.to_numeric(df_filtrado[f'{dia}_open'], errors='coerce')
+        df_filtrado.loc[:, f'{dia}_close'] = pd.to_numeric(df_filtrado[f'{dia}_close'], errors='coerce')
+        
+        print(f"🕒 Registros antes de filtrar por horario: {len(df_filtrado)}")
         df_filtrado = df_filtrado[(df_filtrado[f'{dia}_open'] <= hora) & (df_filtrado[f'{dia}_close'] >= hora)]
-        print(f"Registros después de filtrar por horario: {len(df_filtrado)}")
+        print(f"✅ Registros después de filtrar por horario: {len(df_filtrado)}")
 
         if df_filtrado.empty:
             raise HTTPException(status_code=404, detail="No se encontraron restaurantes abiertos en ese horario.")
 
         # Seleccionar los 10 restaurantes con más reseñas
         top_10_reviews = df_filtrado.nlargest(10, 'num_of_reviews')
-        print(f"Top 10 por num_of_reviews: {len(top_10_reviews)} registros encontrados")
-        
+        print(f"🏆 Top 10 por num_of_reviews: {len(top_10_reviews)} registros encontrados")
+
         # Seleccionar los 5 con mejor rating
         top_5_rating = top_10_reviews.nlargest(5, 'avg_rating')
 
