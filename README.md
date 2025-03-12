@@ -382,10 +382,25 @@ El sistema responderá con una lista de 3 lugares similares que cumplan esas car
   }
 ]
 ```
-<!--
-## Conclusión
-### (COMPLETAR)
 
+## Conclusión
+
+Este proyecto ofrece un enfoque basado en datos para optimizar la ubicación de un nuevo restaurante **Pizza Hut** en las inmediaciones del **MetLife Stadium, en New Jersey**.  
+A través del análisis de reseñas, modelos de **Machine Learning** y un **dashboard interactivo**, se facilita la toma de decisiones estratégicas con información clave del mercado.
+
+### **Impacto del Proyecto**  
+- **Selección estratégica de ubicaciones:** Identificación de zonas óptimas basadas en demanda y competencia.  
+- **Optimización de la experiencia del cliente:** Análisis de reseñas para mejorar la percepción de la marca.  
+- **Herramienta de apoyo para ejecutivos:** Dashboard interactivo que permite evaluar datos en tiempo real.  
+
+### **Propuestas para Próximas Versiones**  
+- **Monitoreo en tiempo real:** Incorporar actualizaciones dinámicas para ajustar estrategias según las tendencias del mercado.  
+- **Expansión del sistema de recomendación:** Ampliar el análisis a otras áreas metropolitanas de alto tráfico.  
+- **Mejoras en los modelos de Machine Learning:** Integrar nuevas fuentes de datos para mejorar la precisión de las predicciones.  
+
+Gracias a este análisis, **Pizza Hut** podrá optimizar su estrategia de expansión en **New York y New Jersey**, asegurando decisiones fundamentadas en datos.  
+
+<!--
 (Sugerencia chatgpt para sección conclusiones)
 Aunque falta completar esta parte, debería incluir:
 * Principales hallazgos
@@ -416,7 +431,7 @@ Este proyecto fue desarrollado por el siguiente equipo de profesionales en cienc
     </td>
     <td align="center">
       <img src="Assets/Facundo_Nahuel_Foto_150.png" width="150" style="border-radius:50%"><br>
-      <b>Facundo Nahuel</b><br>
+      <b>Facundo Serqueira</b><br>
       Data Engineer<br>
       <a href="https://www.linkedin.com/in/facundo-nahuel-serqueira-aba554b/">🔗 LinkedIn</a> |
       <a href="https://github.com/nahuelfns">🐙 GitHub</a>
