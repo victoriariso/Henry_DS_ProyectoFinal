@@ -6,6 +6,8 @@
     # Ve a Streamlit Cloud.
     # Conéctalo con tu repositorio de GitHub.
     # Elige el archivo app.py y despliega la aplicación.
+# Link deployed app:
+    # https://proyecto-final-lcinxctqprwitzzc46viuo.streamlit.app
 
 import streamlit as st
 import joblib
