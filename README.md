@@ -46,13 +46,15 @@ Este proyecto tiene como objetivo identificar la mejor ubicación en las inmedia
 El repositorio está organizado de la siguiente manera:
 ```
 📂 Proyecto-Final
-│── 📂 Assets          # Imágenes y recursos gráficos para documentación y dashboard
-│── 📂 Datos           # Datos sin procesar y procesados
-│── 📂 EDA             # Notebooks y scripts de análisis exploratorio de datos
-│── 📂 Modelos ML      # Modelos de machine learning y scripts relacionados
-│── .gitignore         # Archivos y carpetas que Git debe ignorar
-│── README.md          # Documentación principal del proyecto
-│── requirements.txt   # Lista de dependencias necesarias para ejecutar el proyecto
+│── 📂 .devcontainer    # Configuración para entornos de desarrollo en contenedores
+│── 📂 Assets           # Imágenes y recursos gráficos para documentación y dashboard
+│── 📂 Datos            # Datos sin procesar y procesados
+│── 📂 EDA              # Notebooks y scripts de análisis exploratorio de datos
+│── 📂 Modelos ML       # Modelos de machine learning y scripts relacionados
+│── .gitignore          # Archivos y carpetas que Git debe ignorar
+│── README.md           # Documentación principal del proyecto
+│── recommender.py      # Script del sistema de recomendación
+│── requirements.txt    # Lista de dependencias necesarias para ejecutar el proyecto
 ```
 
 ## Datos Utilizados  
