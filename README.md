@@ -262,7 +262,7 @@ Este módulo realiza un análisis de sentimientos utilizando **VADER Sentiment A
    - Se obtiene la puntuación de sentimiento (**compound**) con VADER.
    - Se categorizan los comentarios como **positivo**, **negativo** o **neutro**.
 
-#### Ejemplo de Resultados <!-- REVISAR Y CORREGIR -->
+#### Ejemplo de Resultados
 
 Un usuario escribe el texto:
 
@@ -300,7 +300,7 @@ Este módulo implementa un **sistema de recomendación de restaurantes** utiliza
 4. **Despliegue con FastAPI**:
    - Se crea un endpoint que recibe datos y devuelve recomendaciones de restaurantes.
 
-#### Ejemplo de Uso <!-- REVISAR Y CORREGIR -->
+#### Ejemplo de Uso
 
 Un usuario solicita recomendaciones enviando una consulta con la información:
 
