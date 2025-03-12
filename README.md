@@ -198,15 +198,15 @@ El pipeline se compone de **dos orígenes de datos principales**:
 Para la ingesta y procesamiento de estos datos, el pipeline se basa en **tres funciones AWS Lambda**, que automatizan la extracción, transformación y carga (ETL) de la información:  
 
 ### **1. Función ETL**  
-**Activación:** Se ejecuta automáticamente cuando un nuevo dataset es subido a la carpeta `input/` del bucket de **Amazon S3**.  
+**Activación:** Se ejecuta automáticamente cuando un nuevo dataset es subido a la carpeta **input/** del bucket de **Amazon S3**.  
 
 **Proceso:**  
 - Toma el dataset subido (sitios de Google Maps o reseñas de usuarios).  
 - Aplica las transformaciones y normalizaciones necesarias.  
-- Guarda los datos procesados en la carpeta `output/` dentro del mismo bucket de S3.  
+- Guarda los datos procesados en la carpeta **output/** dentro del mismo bucket de S3.  
 
 **Uso posterior:**  
-- Una vez procesados, los archivos en `output/` serán utilizados por la **Función carga-a-rds** para poblar las tablas del **Data Warehouse en Amazon RDS**.  
+- Una vez procesados, los archivos en **output/** serán utilizados por la **Función carga-a-rds** para poblar las tablas del **Data Warehouse en Amazon RDS**.  
 
 ### **2. Función Extraccion_censo_ny_nj_2022**  
 **Activación:** Programada para ejecutarse **todos los lunes a las 08:00 AM**.  
@@ -217,7 +217,7 @@ Para la ingesta y procesamiento de estos datos, el pipeline se basa en **tres fu
 - Carga los datos procesados directamente en el **Data Warehouse en Amazon RDS**.  
 
 ### **3. Función carga-a-rds**  
-**Activación:** Se ejecuta cuando un nuevo archivo es subido a la carpeta `output/` en **Amazon S3**.  
+**Activación:** Se ejecuta cuando un nuevo archivo es subido a la carpeta **output/** en **Amazon S3**.  
 
 **Proceso:**  
 - Toma los archivos ya transformados y normalizados.  
@@ -229,7 +229,7 @@ Para la ingesta y procesamiento de estos datos, el pipeline se basa en **tres fu
 ### **Flujo de Datos**  
 
 1. Carga de datos en S3 o consulta a la API del Censo.  
-2. La función ETL transforma los datos de Google Maps y los mueve a `output/`.  
+2. La función ETL transforma los datos de Google Maps y los mueve a **output/**.  
 3. La función Extraccion_censo_ny_nj_2022 obtiene y carga datos del censo en RDS.  
 4. La función carga-a-rds sube los datos procesados a Amazon RDS.  
 5. El dashboard en Power BI y los modelos de Machine Learning consumen los datos del Data Warehouse.  
@@ -240,8 +240,50 @@ Con este diseño, garantizamos un pipeline de datos **eficiente, escalable y aut
 ![alt text](<Assets/Pipeline automatizado.JPG>)
 
 ## Dashboard
-### (COMPLETAR)
+
 <!-- Meterle fotos del dashboard y poner el storytelling -->
+
+El **dashboard interactivo en Power BI** proporciona un análisis detallado y dinámico sobre el desempeño de los restaurantes Pizza Hut en los estados de **New York (NY) y New Jersey (NJ)**.  
+A través de una combinación de visualizaciones, métricas clave y opciones de filtrado, el dashboard permite evaluar la percepción de los clientes, la evolución de las reseñas y la cuota de mercado de la marca en comparación con la competencia.
+
+### **Principales Componentes**  
+
+#### **1. Filtros Interactivos**  
+Para facilitar un análisis flexible, el dashboard incluye:  
+- **Filtro por estado:** Permite seleccionar y analizar datos de los estados de NY y NJ.  
+- **Filtro por trimestre:** Permite evaluar el desempeño en períodos trimestrales.  
+
+#### **2. Indicadores Claves de Rendimiento (KPIs)**  
+Los KPIs ofrecen un resumen rápido de los datos más relevantes:  
+- **Cantidad de reseñas:** Mide el número total de reseñas en el período y estado seleccionado, comparándolo con el trimestre anterior. *(Objetivo: crecimiento trimestral de 20% o más)*.  
+- **Valoración promedio:** Presenta el promedio general de las calificaciones otorgadas por los clientes, comparándolo con el período anterior. *(Objetivo: incremento trimestral mínimo de 0.1 puntos)*.  
+- **Proporción de reseñas positivas:** Muestra el porcentaje de reseñas con una calificación de 3 estrellas o más sobre el total recibido en el período y estado seleccionado. *(Objetivo: aumento trimestral de 3% o más)*.  
+
+#### **3. Tarjetas de Resumen**  
+Incluyen datos clave sobre la presencia y reputación de los restaurantes:  
+- **Total de restaurantes:** Cantidad total de establecimientos de Pizza Hut en NY y NJ.  
+- **Cantidad de restaurantes Express:** Número de locales de tipo Express.  
+- **Cantidad de reseñas positivas:** Total de comentarios con calificación de 3 estrellas o más.  
+- **Cantidad de reseñas negativas:** Total de comentarios con calificación de 1 o 2 estrellas.  
+
+#### **4. Análisis de Cuota de Mercado**  
+Un **gráfico de anillo** permite visualizar la cuota de mercado de Pizza Hut en comparación con otras cadenas de pizza como **Domino’s, Papa John’s y Little Caesars**, proporcionando un análisis competitivo de la marca en los estados seleccionados.  
+
+#### **5. Mapa de Ubicación de Restaurantes**  
+Un **mapa interactivo** representa la distribución geográfica de los restaurantes Pizza Hut en **Nueva York y Nueva Jersey**, permitiendo identificar zonas estratégicas para la apertura de nuevos locales.  
+
+![alt text](Assets/dashboard_estadisticas1.PNG)
+![alt text](Assets/dashboard_kpis2.PNG)
+
+<!-- 
+---
+
+### **Conclusión**  
+El dashboard en Power BI es una herramienta esencial para la **toma de decisiones estratégicas**, ya que facilita el monitoreo del desempeño de los restaurantes, la evaluación de la satisfacción del cliente y el análisis de la cuota de mercado.  
+Gracias a la combinación de **filtros interactivos, KPIs y visualizaciones dinámicas**, permite una gestión basada en datos que contribuye a mejorar la experiencia del cliente y optimizar la presencia de Pizza Hut en la región.  
+
+---
+-->
 
 ## Modelos de Machine Learning
 
@@ -262,7 +304,7 @@ Este módulo realiza un análisis de sentimientos utilizando **VADER Sentiment A
    - Se obtiene la puntuación de sentimiento (**compound**) con VADER.
    - Se categorizan los comentarios como **positivo**, **negativo** o **neutro**.
 
-#### Ejemplo de Resultados <!-- REVISAR Y CORREGIR -->
+#### Ejemplo de Resultados
 
 Un usuario escribe el texto:
 
@@ -300,7 +342,7 @@ Este módulo implementa un **sistema de recomendación de restaurantes** utiliza
 4. **Despliegue con FastAPI**:
    - Se crea un endpoint que recibe datos y devuelve recomendaciones de restaurantes.
 
-#### Ejemplo de Uso <!-- REVISAR Y CORREGIR -->
+#### Ejemplo de Uso
 
 Un usuario solicita recomendaciones enviando una consulta con la información:
 
@@ -338,11 +380,10 @@ El sistema responderá con una lista de 3 lugares similares que cumplan esas car
   }
 ]
 ```
-
+<!--
 ## Conclusión
 ### (COMPLETAR)
 
-<!-- 
 (Sugerencia chatgpt para sección conclusiones)
 Aunque falta completar esta parte, debería incluir:
 * Principales hallazgos
