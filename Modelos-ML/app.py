@@ -6,6 +6,8 @@
     # Ve a Streamlit Cloud.
     # Conéctalo con tu repositorio de GitHub.
     # Elige el archivo app.py y despliega la aplicación.
+# Link deployed app:
+    # https://proyecto-final-rlja3b9nv6xsu4ythfukem.streamlit.app/
 
 import streamlit as st
 import joblib
@@ -49,7 +51,17 @@ if st.button("Clasificar Comentario"):
         try:
             texto_tfidf = vectorizer.transform([texto])
             prediccion = modelo_sentimientos_final.predict(texto_tfidf)[0]
-            st.success(f"El comentario tiene un sentimiento: **{prediccion}**")
+            
+            # Asignar color según el sentimiento
+            color = "green" if prediccion == "positivo" else "red" if prediccion == "negativo" else "gray"
+
+            # Mostrar resultado con color
+            st.markdown(f"""
+                <div style="padding: 10px; background-color: {color}; color: white; border-radius: 5px; text-align: center;">
+                    <b>El comentario tiene un sentimiento: {prediccion}</b>
+                </div>
+            """, unsafe_allow_html=True)        
+        
         except Exception as e:
             st.error(f"Error en la predicción: {str(e)}")
     else:
