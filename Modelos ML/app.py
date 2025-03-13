@@ -7,7 +7,7 @@
     # Conéctalo con tu repositorio de GitHub.
     # Elige el archivo app.py y despliega la aplicación.
 # Link deployed app:
-    # https://proyecto-final-lcinxctqprwitzzc46viuo.streamlit.app
+    # https://proyecto-final-rlja3b9nv6xsu4ythfukem.streamlit.app/
 
 import streamlit as st
 import joblib
