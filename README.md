@@ -243,16 +243,33 @@ Con este diseño, garantizamos un pipeline de datos **eficiente, escalable y aut
 
 ## Dashboard
 
-<!-- Meterle fotos del dashboard y poner el storytelling -->
-
 El **dashboard interactivo en Power BI** proporciona un análisis detallado y dinámico sobre el desempeño de los restaurantes Pizza Hut en los estados de **New York (NY) y New Jersey (NJ)**.  
 A través de una combinación de visualizaciones, métricas clave y opciones de filtrado, el dashboard permite evaluar la percepción de los clientes, la evolución de las reseñas y la cuota de mercado de la marca en comparación con la competencia.
 
 ### **Principales Componentes**  
 
+#### **1. Filtro Interactivo**  
+- **Filtro por estado:** Permite seleccionar y analizar datos del **top 6 de estados con mayor cantidad de ganancias** y de **New Jersey (NJ)**.  
+
+#### **2. Tarjetas de Resumen**  
+Incluyen datos clave sobre la presencia y desempeño de los restaurantes:  
+- **Establecimientos:** Cantidad total de establecimientos.  
+- **Total Ganancias:** Suma de las ganancias de todos los estados.  
+- **Promedio Reseñas NJ/NY:** Promedio de las reseñas de todas las pizzerías de estos dos estados.  
+
+#### **3. Gráfico de Barras**  
+- Representa los **6 estados con mayor cantidad de ganancias** y el estado de **New Jersey (NJ)**.  
+
+#### **4. Mapa Interactivo**  
+- Muestra la relación entre **Cantidad de Establecimientos y Ganancias** por estado.  
+
+---
+
+### **Métricas e Indicadores Clave**  
+
 #### **1. Filtros Interactivos**  
 Para facilitar un análisis flexible, el dashboard incluye:  
-- **Filtro por estado:** Permite seleccionar y analizar datos de los estados de NY y NJ.  
+- **Filtro por estado:** Permite seleccionar y analizar datos de los estados de **New York (NY) y New Jersey (NJ)**.  
 - **Filtro por trimestre:** Permite evaluar el desempeño en períodos trimestrales.  
 
 #### **2. Indicadores Claves de Rendimiento (KPIs)**  
@@ -263,16 +280,16 @@ Los KPIs ofrecen un resumen rápido de los datos más relevantes:
 
 #### **3. Tarjetas de Resumen**  
 Incluyen datos clave sobre la presencia y reputación de los restaurantes:  
-- **Total de restaurantes:** Cantidad total de establecimientos de Pizza Hut en NY y NJ.  
-- **Cantidad de restaurantes Express:** Número de locales de tipo Express.  
-- **Cantidad de reseñas positivas:** Total de comentarios con calificación de 3 estrellas o más.  
-- **Cantidad de reseñas negativas:** Total de comentarios con calificación de 1 o 2 estrellas.  
+- **Total de restaurantes:** Cantidad total de establecimientos de **Pizza Hut** en NY y NJ.  
+- **Cantidad de restaurantes Express:** Número de locales de tipo **Express**.  
+- **Cantidad de reseñas positivas:** Total de comentarios con calificación de **3 estrellas o más**.  
+- **Cantidad de reseñas negativas:** Total de comentarios con calificación de **1 o 2 estrellas**.  
 
 #### **4. Análisis de Cuota de Mercado**  
-Un **gráfico de anillo** permite visualizar la cuota de mercado de Pizza Hut en comparación con otras cadenas de pizza como **Domino’s, Papa John’s y Little Caesars**, proporcionando un análisis competitivo de la marca en los estados seleccionados.  
+- Un **gráfico de anillo** permite visualizar la cuota de mercado de **Pizza Hut** en comparación con otras cadenas de pizza como **Domino’s, Papa John’s y Little Caesars**, proporcionando un análisis competitivo de la marca en los estados seleccionados.  
 
 #### **5. Mapa de Ubicación de Restaurantes**  
-Un **mapa interactivo** representa la distribución geográfica de los restaurantes Pizza Hut en **Nueva York y Nueva Jersey**, permitiendo identificar zonas estratégicas para la apertura de nuevos locales.  
+- Un **mapa interactivo** representa la distribución geográfica de los restaurantes **Pizza Hut** en **Nueva York y Nueva Jersey**, permitiendo identificar **zonas estratégicas** para la apertura de nuevos locales.  
 
 ![alt text](Assets/dashboard_estadisticas1.PNG)
 ![alt text](Assets/dashboard_kpis2.PNG)
