@@ -343,23 +343,24 @@ Por lo que el modelo responde con el sentimiento del comentario en formato JSON 
 
 Este módulo implementa un **sistema de recomendación de restaurantes** utilizando el algoritmo **K-Nearest Neighbors (KNN)** para encontrar lugares similares en base a características preprocesadas.
 
-#### Modelo Utilizado
+## Modelo Utilizado
 
 - **K-Nearest Neighbors (KNN)**: Encuentra restaurantes similares basándose en distancias en un espacio vectorial.
-- **FastAPI**: Se utiliza para exponer el sistema de recomendación como un servicio API.
-- **Joblib**: Para guardar y cargar modelos previamente entrenados.
+- **Streamlit**: Se utiliza para construir una interfaz interactiva donde los usuarios pueden ingresar parámetros y obtener recomendaciones en tiempo real.
+- **Joblib**: Permite guardar y cargar modelos previamente entrenados para su uso en producción.
 
-#### Proceso
+## Proceso
 
 1. **Carga de Datos**: Se lee un archivo **Parquet** con información de restaurantes.
 2. **Preprocesamiento**:
    - Se limpian los datos y se convierten a un formato adecuado.
    - Se extraen características relevantes para el modelo.
 3. **Entrenamiento del Modelo**:
-   - Se utiliza KNN para encontrar restaurantes similares.
+   - Se utiliza **KNN** para encontrar restaurantes similares según su ubicación, horarios y calificaciones.
    - Se ajustan los parámetros óptimos según los datos disponibles.
-4. **Despliegue con FastAPI**:
-   - Se crea un endpoint que recibe datos y devuelve recomendaciones de restaurantes.
+4. **Despliegue con Streamlit**:
+   - Se desarrolla una interfaz interactiva donde los usuarios pueden ingresar datos como código postal, día y hora.
+   - El sistema procesa la consulta y muestra recomendaciones de restaurantes en pantalla de forma dinámica.
 
 #### Ejemplo de Uso
 
