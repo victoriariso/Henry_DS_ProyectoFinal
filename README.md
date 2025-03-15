@@ -4,13 +4,15 @@
 
 ## Descripción del proyecto
 
-Este proyecto tiene como objetivo identificar la mejor ubicación para la apertura de un restaurante de pizzas en la ciudad de New York y en las inmediaciones del MetLife Stadium, en New Jersey, para nuestro cliente Pizza Hut.  
+El objetivo del este proyecto es identificar la mejor ubicación para la apertura de un nuevo restaurante de pizzas en la ciudad de New York o alrededores para nuestro cliente Pizza Hut.  
 
-Para ello, se desarrollaron dos modelos de Machine Learning:  
+Se diseñó un **dashboard interactivo en Power BI** que proporciona un análisis detallado y dinámico sobre el desempeño de los restaurantes Pizza Hut en los estados de **New York (NY) y New Jersey (NJ)** y permite optimizar la toma de decisiones estratégicas respecto a la ubicación de nuevas pizzerías.
+
+Además, se desarrollaron dos modelos de Machine Learning:  
 - Un **sistema de recomendación**, que sugiere tres establecimientos cercanos a los clientes potenciales.  
 - Un **modelo de análisis de sentimientos**, basado en reseñas previas de los usuarios, para evaluar la percepción de los consumidores sobre distintos restaurantes.  
 
-Además, se diseñó un **dashboard interactivo en Power BI** que permite visualizar métricas clave y optimizar la toma de decisiones estratégicas respecto a la ubicación de nuevas pizzerías y reviews dejados por el cliente.  
+  
 
 ## Tabla de Contenidos
 1. [Introducción](#introducción)
@@ -161,13 +163,13 @@ Datos de Sitios Google Maps
 | gmap_id       | char(50)    | No           | Identificador único de Google Maps |
 | name          | char(100)   | No           | Nombre del establecimiento |
 | street_address| char(100)   | Sí           | Calle y número de la ubicación |
-| city          | char(50)    | No           | Ciudad donde se encuentra el establecimiento |
-| state         | char(2)     | No           | Estado (NJ o NY) |
-| zip_code      | smallint    | No           | Código postal del establecimiento |
-| latitude      | float       | No           | Latitud geográfica |
-| longitude     | float       | No           | Longitud geográfica |
-| avg_rating    | float       | No           | Calificación promedio del establecimiento (1-5) |
-| num_of_reviews| smallint    | No           | Número total de reseñas registradas |
+| city          | char(50)    | Sí           | Ciudad donde se encuentra el establecimiento |
+| state         | char(2)     | Sí           | Estado (NJ o NY) |
+| zip_code      | smallint    | Sí           | Código postal del establecimiento |
+| latitude      | float       | Sí           | Latitud geográfica |
+| longitude     | float       | Sí           | Longitud geográfica |
+| avg_rating    | float       | Sí           | Calificación promedio del establecimiento (1-5) |
+| num_of_reviews| smallint    | Sí           | Número total de reseñas registradas |
 | price         | char(5)     | Sí           | Rango de precios ($, $$, $$$) |
 | Monday        | char(20)    | Sí           | Horario de atención los días lunes |
 | Tuesday       | char(20)    | Sí           | Horario de atención los días martes |
@@ -176,12 +178,12 @@ Datos de Sitios Google Maps
 | Friday        | char(20)    | Sí           | Horario de atención los días viernes |
 | Saturday      | char(20)    | Sí           | Horario de atención los días sábados |
 | Sunday        | char(20)    | Sí           | Horario de atención los domingos |
-| Delivery      | bit         | No           | Indica si el establecimiento ofrece entrega a domicilio (1 = Sí, 0 = No) |
+| Delivery      | bit         | Sí           | Indica si el establecimiento ofrece entrega a domicilio (1 = Sí, 0 = No) |
 | Dine-in       | bit         | Sí           | Indica si sirven comida para consumir en el local (1 = Sí, 0 = No) |
-| Takeout       | bit         | No           | Indica si sirven comida para llevar (1 = Sí, 0 = No) |
-| Good_for_kids | bit         | No           | Indica si es apto para niños (1 = Sí, 0 = No) |
-| Casual        | bit         | No           | Indica si el ambiente es informal (1 = Sí, 0 = No) |
-| Dinner        | bit         | No           | Indica si es un lugar adecuado para cenar (1 = Sí, 0 = No) |
+| Takeout       | bit         | Sí           | Indica si sirven comida para llevar (1 = Sí, 0 = No) |
+| Good_for_kids | bit         | Sí           | Indica si es apto para niños (1 = Sí, 0 = No) |
+| Casual        | bit         | Sí           | Indica si el ambiente es informal (1 = Sí, 0 = No) |
+| Dinner        | bit         | Sí           | Indica si es un lugar adecuado para cenar (1 = Sí, 0 = No) |
 | Lunch         | bit         | Sí           | Indica si es un lugar adecuado para almorzar (1 = Sí, 0 = No) |
 
 ## Modelo Entidad-Relación
